@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+int main() {
+   double meter, mile;
+  
+   printf("마일을 입력하시오 : ");
+   scanf("%lf",&mile);
+  
+   meter = mile * 1609;
+   printf("%.1lf마일은 %.4lf미터 입니다.\n",mile, meter);
+   printf("계속하려면 아무 키나 누르십시오.");
+   return 0;
+} 

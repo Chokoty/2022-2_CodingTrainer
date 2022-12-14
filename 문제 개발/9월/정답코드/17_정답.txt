@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+int main() {
+   int c;
+
+   printf("아스키코드값을 입력하시오: ");
+   scanf("%d",&c);
+   printf("문자: %c입니다. \n", c);
+
+   return 0;
+}

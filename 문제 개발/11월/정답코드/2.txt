@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+   char arr[1000001];
+   int a[26] = { 0, };
+   char *p = arr;
+   int *q = a;
+   int  max = 0, num = 0, n = 0, len = 0;
+
+   scanf("%s", arr);
+   len = strlen(arr);
+
+   for (int i = 0; i < len; i++) {
+      if (p[i] >= 97) {
+         p[i] = p[i] - 32;
+      }
+      q[p[i] - 65]++;
+   }
+   max = a[0];
+   for (int i = 1; i < 26; i++) {
+      if (max < q[i]) {
+         max = q[i];
+         num = i;
+      }
+   }
+   for (int i = 0; i < 26; i++) {
+      if (max == q[i]) {
+         n++;
+      }
+   }
+   if (n > 1) {
+      printf("?");
+   }
+   else {
+      printf("%c ", num + 65);
+   }
+   return 0;
+}

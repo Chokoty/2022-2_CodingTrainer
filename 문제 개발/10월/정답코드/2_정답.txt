@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <string.h> // 문자열 관련 함수들이 들어있습니다. strlen()
+
+int main() {   
+    int n, score, sum;
+
+// 문자열 배열을 이용해서 문자열을 입력받을 수 있습니다.
+    char test[80];
+
+    scanf("%d", &n);
+
+    for(int i=0; i<n; i++) {
+        sum = 0;
+        score = 1;
+
+// 문자열은 주소(&) 대신 이름으로 넣습니다.  
+        scanf("%s", test);
+
+// strlen 함수를 이용하면 문자열의 길이를 구할 수 있습니다.
+        for(int j=0; j<strlen(test); j++) {
+            if(test[j] == 'O') {
+                sum += score;
+                score++;
+            }
+            if(test[j] == 'X')  score = 1;
+        } 
+        printf("%d\n", sum);
+    }
+  
+  return 0;
+}

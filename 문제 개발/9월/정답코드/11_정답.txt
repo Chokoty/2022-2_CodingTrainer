@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(void){
+  char input[20];
+  int score = 0;
+  scanf("%s", input);
+
+  for(int i=0; i<strlen(input); i++){
+    printf("%d\n", input[i]);
+    score += input[i];
+  }
+  printf("%d\n", score);
+  
+  return 0;
+}

@@ -1,0 +1,139 @@
+
+// 업다운
+// 랜덤으로 숫자 생성해서 맞추는 게임
+// 참고 링크 : https://it-tip.tistory.com/6 
+// 1:쉬움(1~50) 2:보통(1~100) 3:어려움(1~200) 4:커스텀"
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h> 
+#include <time.h>
+
+void PrintTitle();
+int ChooseGameLevel();
+void MakeHiddenNumber();
+void  PlayerUpDown();
+ 
+int max = 0; // 전역변수 -> 그냥 접근 가능하다.
+int cnt = 0;
+
+int main(){ 
+  
+	int hiddenNum = 0; // 지역변수 -> 함수에서 포인터로 접근해야한다.
+	char input = 0;
+  int c = 0;
+  srand((unsigned int)time(NULL));
+
+  while(1){
+    // -1. 이전 값들 초기화하기
+    max = 0;
+    cnt = 0;
+    
+    // 0. 타이틀 출력하기
+    PrintTitle();
+    
+    // 1. 게임 난이도 정하기
+    c = ChooseGameLevel();
+    
+    // 2. 랜덤 숫자 생성하기
+    MakeHiddenNumber(c, &hiddenNum);
+    //printf("hidden : %d\n", hiddenNum);
+  
+    // 3. 플레이어 맞추기
+    PlayerUpDown(&hiddenNum);
+  
+    printf("\n<<<< 아무 문자를 눌러 다시하기 | 종료: q/Q >>>>\n\n");
+    scanf("%c", &input);
+    if(input == 'Q' || input =='q'){
+      printf("게임을 종료합니다.\n");
+      break;
+    }
+    while (getchar() != '\n'); // 입력버퍼 비우기 필수!
+  }
+
+	return 0;
+}
+
+// 타이틀을 출력하는 함수
+void PrintTitle(){
+  printf("------------업다운 게임------------\n");
+  printf("난이도를 선택하세요\n");
+  printf("1:쉬움(1~50) 2:보통(1~100) 3:어려움(1~200) 4:커스텀\n");
+}
+
+// 난이도를 정하는 함수
+// - 입력 예외처리하기
+int ChooseGameLevel(){
+  int c = 0;
+  while(1){
+    scanf("%d", &c);
+    if(c == 1 || c == 2 || c == 3 || c == 4){
+      break;
+    }
+    else{
+      printf("알맞은 숫자를 입력해주세요...\n");
+    }
+    while (getchar() != '\n'); // 입력버퍼 비우기 필수!
+  }
+  return c;
+}
+
+// 난이도에 따라서 랜덤으로 히든넘버를 생성하는 함수
+// - 1을 입력받으면 max = 50
+// - 2를 입력받으면 max = 100
+// - 3을 입력받으면 max = 200
+// - 4를 입력받으면 max = 사용자 입력값
+void MakeHiddenNumber(int c, int* hiddenNum){
+  int hidden; // 지역변수 != 포인터매개변수
+  
+  if(c == 1){
+    max = 50;
+    
+  }else if(c == 2){
+    max = 100;
+    
+  }else if(c == 3){
+    max = 200;
+    
+  }else if(c == 4){
+    printf("1부터 몇 까지?\n");
+    scanf("%d", &max);
+    
+  }
+  hidden = rand() % (max-1+1) + 1;
+  //printf("hidden : %d\n", hidden);
+
+  *hiddenNum = hidden; // 포인터로 메인에 있는 hiddenNum에 연결해 값을 전달해준다.
+  // return 없이 가능하다.
+}
+
+// 플레이어가 업 다운 하는 함수
+void  PlayerUpDown(int* hiddenNum){
+
+  int inputNum;
+  
+  while(1){
+    cnt++;
+    printf("1부터 %d까지 숫자 중 하나를 입력하세요(%d번째 도전)\n", max, cnt);
+		scanf("%d", &inputNum);
+
+    if(inputNum < 1 || inputNum > max){
+      printf("조건에 맞는 숫자를 입력해주세요\n");
+      while (getchar() != '\n'); // 입력버퍼 비우기 필수!
+      cnt--;
+      continue;
+    }
+    
+    if(inputNum == *hiddenNum){
+      printf("정답!!!\n%d번 만에 맞췄습니다\n", cnt);
+      return 0;
+    }
+    if(inputNum > *hiddenNum){
+			printf("Down!\n");
+    }
+    else{
+			printf("Up!\n");
+    }
+  }
+}
+

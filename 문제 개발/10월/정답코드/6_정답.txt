@@ -1,0 +1,115 @@
+//몬티홀의 역설
+//문이 3개. 셋중 하나만 스포츠카가 있다. 나머지는 염소가 들어있다.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define CNT 10000 // 반복 횟수를 정할 수 있다.
+
+
+int car_d;
+int fir_choice, sec_choice, open_choice;
+int door[3] = { 0, 0, 0 };
+int sel[3] = { -1, -1, -1 };
+int cnt = 0;
+int win = 0, lose = 0;
+float rate = 0;
+float rate2 = 0;
+
+void Test(int changePick);
+
+int main(void)
+{
+  srand((unsigned int)time(NULL));
+  
+	// 1. 1차 선택에서 정한 문을 바꿀 경우
+  Test(1);
+
+	// 2. 1차 선택에서 정한 문을 바꾸지 않을 경우
+  Test(0);
+
+	//최종 정리
+	printf("1차 선택을 바꿀 경우 : %f\n", rate);
+	printf("1차 선택을 바꾸지 않은 경우 : %f\n", rate2);
+
+	return 0;
+}
+
+void Test(int changePick){
+  
+  // 초기화
+  win = 0;
+	lose = 0;
+	cnt = 0;
+  
+	while (cnt < CNT) // 자동으로 반복 시행
+	{
+    // 초기화
+		for (int i = 0; i < 3; i++)
+		{
+			door[i] = 0;
+			sel[i] = -1;
+		}
+
+    // 랜덤 차 배치하기
+		car_d = rand() % 3 + 1;
+		door[car_d - 1] = 1; //문선택 후, 스포츠 카가 들어갔다. 
+
+    //첫 번쨰 선택하기
+		fir_choice = rand() % 3 + 1; // 테스트는 랜덤으로 선택한다.
+		sel[fir_choice - 1] = 1;  //이제 1차 선택이 완료되었다.
+
+    // 몬트홀이 열 문을 선택하기
+		while (1)
+		{
+			open_choice = rand() % 3 + 1;
+			if (door[open_choice - 1] == 0 && sel[open_choice - 1] == -1)
+			{
+				break;
+			}
+		}//스포츠카가 없고, 1차 선택이 아닌 곳을 임의로 선택하여 염소임을 보여준다.
+
+		printf("스포츠카: %d \t 1차 선택: %d\t 염소: %d 보여줌\n", car_d, fir_choice, open_choice);
+
+    if(changePick == 1){
+      
+      // 1. 1차 선택을 바꿀 경우
+		  sec_choice = 6 - fir_choice - open_choice;
+  		
+  		if (door[sec_choice - 1] == 1){
+  			win++;
+  		}else{
+  			lose++;
+  		}
+  		cnt++;
+    }else if(changePick == 0){
+      
+      // 2. 1차 선택을 바꾸지 않은 경우
+		  sec_choice = fir_choice;
+  		
+  		if (door[sec_choice - 1] == 1)
+  		{
+  			win++;
+  		}
+  		else
+  		{
+  			lose++;
+  		}
+  		cnt++;
+    }
+	}
+
+  if(changePick == 1){
+	  printf("1차 선택을 바꾼 경우 : win:%d  lose:%d  ", win, lose);
+  	rate = (float)(win * 100) / (float)(win + lose);
+  	printf("맞춘 확률 : %f\n\n", rate);
+    
+  }else if(changePick == 0){
+	  printf("1차선택을 바꾸지 않은 경우 : win:%d  lose:%d  ", win, lose);
+  	rate2 = (float)(win * 100) / (float)(win + lose);
+  	printf("맞춘 확률 : %f\n\n", rate2);
+  
+  }
+}
+

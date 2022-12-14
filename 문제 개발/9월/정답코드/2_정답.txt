@@ -1,0 +1,27 @@
+// 입력한 숫자의 모든 약수를 구하는 프로그램
+
+#include <stdio.h>
+ 
+int main()
+{
+  int n = 0;
+  int temp = 1;
+  int cnt = 0;
+  scanf("%d", &n);
+
+  printf("%d의 모든 약수: ", n);
+  while(temp <= n){
+    if(n % temp == 0){
+      printf("%d ", temp);
+      cnt++;
+    }
+    temp++;
+  }
+  printf("\\n");
+  printf("%d의 모든 약수의 개수: %d\\n", n, cnt);
+  if(cnt == 2){
+    printf("%d은/는 소수입니다!", n);
+  }
+
+	return 0;
+}

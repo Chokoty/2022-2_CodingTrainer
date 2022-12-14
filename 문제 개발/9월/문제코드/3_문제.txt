@@ -1,0 +1,16 @@
+// 피보나치 수열
+// 출력: 1 1 2 3 5 8 13
+// 입력: 6 출력: 8
+#include <stdio.h>
+ 
+int main()
+{
+  int fn, fn_1, fn_2;
+  fn_1 = 1;
+  fn_2 = 1;
+
+  int n; 
+  scanf("%d", &n);
+  
+	return 0;
+}

@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(void){
+    int H, M;
+    scanf("%d %d", &H, &M);
+  
+    int input;
+    scanf("%d", &input);
+ 
+    if(M + input < 60)
+        printf("%d %d", H, M + input);
+    else{   
+        int hour = (M+input)/60;
+        int min = (M+input)%60;
+        if(H+hour<24)
+            printf("%d %d", H+hour, min);
+        else    //A+hour>=24
+            printf("%d %d", H+hour-24, min);
+    }
+}

@@ -1,0 +1,30 @@
+#include <stdio.h>
+ 
+int main() {
+  
+  int n;
+  int start;
+  int front, back;
+  int count = 0;
+
+  scanf("%d", &n);
+  start = n;
+  
+  //구간조건주기
+  if(n < 0 || n > 99)
+    return 0;
+    
+  
+  while(1){
+    front = n/10;
+    back = n%10;
+    
+    n = back * 10 + (front + back)%10;
+    count++;
+    
+    if(n == start)
+      break;
+  }
+  printf("%d\n", count);
+  
+}

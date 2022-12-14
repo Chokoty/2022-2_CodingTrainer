@@ -1,0 +1,18 @@
+#include <stdio.h>
+ 
+int main()
+{
+  int n = 0;
+  int sub;
+  int sum = 0;
+  scanf("%d", &n);
+  
+  while(n > 0) {
+    sub = n / 10 * 10;
+    sum += n - sub;
+    n /= 10;
+  }
+  
+  printf("%d", sum);
+	return 0;
+}

@@ -1,0 +1,120 @@
+
+// 업다운
+// 랜덤으로 숫자 생성해서 맞추는 게임
+// 1:쉬움(1~50) 2:보통(1~100) 3:어려움(1~200) 4:커스텀"
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h> 
+#include <time.h>
+
+void PrintTitle();
+int ChooseGameLevel();
+void MakeHiddenNumber(int c, int* hiddenNum);
+void  PlayerUpDown(int* hiddenNum);
+ 
+int max = 0; // 전역변수 -> 그냥 접근 가능하다.
+int cnt = 0;
+
+int main(){ 
+  
+	int hiddenNum = 0; // 지역변수 -> 함수에서 포인터로 접근해야한다.
+	char input = 0;
+  int c = 0;
+  srand((unsigned int)time(NULL));
+
+  while(1){
+    // -1. 이전 값들 초기화하기
+    max = 0;
+    cnt = 0;
+    
+    // 0. 타이틀 출력하기
+    PrintTitle();
+    
+    // 1. 게임 난이도 정하기
+    c = ChooseGameLevel();
+    
+    // 2. 랜덤 숫자 생성하기
+    MakeHiddenNumber(c, &hiddenNum);
+    //printf("hidden : %d\n", hiddenNum);
+  
+    // 3. 플레이어 맞추기
+    PlayerUpDown(&hiddenNum);
+  
+    printf("\n<<<< 아무 문자를 눌러 다시하기 | 종료: q/Q >>>>\n\n");
+    while (getchar() != '\n'); // 입력버퍼 비우기 필수!
+    scanf("%c", &input);
+    if(input == 'Q' || input =='q'){
+      printf("게임을 종료합니다.\n");
+      break;
+    }
+    
+  }
+
+	return 0;
+}
+
+// 타이틀을 출력하는 함수
+void PrintTitle(){
+  // ====여기에 코드를 작성하세요====
+  
+  // ==========================
+  
+}
+
+// 난이도를 정하는 함수
+// - 입력 예외처리하기
+// - 정수값 반환하기
+// - 반복해서 입력을 받으려면 입력버퍼를 비워야한다.
+// - while (getchar() != '\n'); 를 추가하기
+int ChooseGameLevel(){
+  int c = 0;
+
+    // ====여기에 코드를 작성하세요====
+  
+    // ==========================
+  
+  return c;
+}
+
+// 난이도에 따라서 랜덤으로 히든넘버를 생성하는 함수
+// - 1을 입력받으면 max = 50
+// - 2를 입력받으면 max = 100
+// - 3을 입력받으면 max = 200
+// - 4를 입력받으면 max = 사용자 입력값
+// - 포인터매개변수로 값을 전달해준다.
+void MakeHiddenNumber(int c, int* hiddenNum){
+  int hidden; // 지역변수 != 포인터매개변수
+  max = 0; // 전역변수
+
+  // ====여기에 코드를 작성하세요====
+  
+  // ==========================
+  
+  hidden = rand() % (max-1+1) + 1;
+  //printf("hidden : %d\n", hidden);
+
+  *hiddenNum = hidden; // 포인터로 메인에 있는 hiddenNum에 연결해 값을 전달해준다.
+  // return 없이 가능하다.
+}
+
+// 플레이어가 업 다운 하는 함수
+// - 정답과 플레이어가 입력한 숫자를 비교해서 정답보다 작으면 "Up!" 크면 "Down!" 을 출력한다.
+// - 정답을 맞추면 "정답!!! n번 만에 맞췄습니다" 출력하기
+// - 범위에 벗어나면 예외처리하기
+//   - "조건에 맞는 숫자를 입력해주세요" 출력하기
+// - while (getchar() != '\n'); // 반복해서 입력받으려면 입력버퍼 비우기 필수!
+void  PlayerUpDown(int* hiddenNum){
+
+  int inputNum;
+  while(1){
+    // ====여기에 코드를 작성하세요====
+  
+    // ==========================
+    cnt++;
+    printf("1부터 %d까지 숫자 중 하나를 입력하세요(%d번째 도전)\n", max, cnt);
+		scanf("%d", &inputNum);
+  }
+}
+
+

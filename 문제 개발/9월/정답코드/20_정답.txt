@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+  char input[40];
+  
+  scanf("%[^\n]s", input); // 공백 문자열 포함해서 입력받는방법! 
+
+  for(int i = strlen(input)-1; i>=0; i--){
+    printf("%c", input[i]);
+  }
+  printf("\n");
+
+   return 0;
+}
+
+
+// 참고 
+// https://marobiana.tistory.com/159 
